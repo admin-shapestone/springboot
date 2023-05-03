@@ -7,5 +7,5 @@ import com.shapestone.springboot.model.Employee;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
-
+	Employee findByName(String name);
 }

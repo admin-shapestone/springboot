@@ -10,21 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shapestone.springboot.model.Employee;
 import com.shapestone.springboot.service.EmployeeService;
 
-import jakarta.websocket.server.PathParam;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
-
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(EmployeeController.class);
-
 	@Autowired
 	private EmployeeService employeeService;
 
@@ -34,24 +28,31 @@ public class EmployeeController {
 		log.info("In Employee controller, requested {/list} web method");
 		return employeeService.getEmpoyeeList();
 	}
+
 	@GetMapping("/{empId}")
 	public Employee getEmployeeById(@PathVariable("empId") int empId) {
 		return employeeService.getEmpById(empId);
-		
+
 	}
-	
-	@PostMapping("/")
+
+	@GetMapping("/name/{empId}")
+	public Employee getEmployeeByName(@PathVariable("empId") String empName) {
+		return employeeService.getEmpByName(empName);
+
+	}
+
+	@PostMapping(value = "/", consumes = "application/json", produces = "application/json")
 	public Employee postEmployee(@RequestBody Employee employee) {
 		log.info("In Employee controller, requested {/} post :: web method");
 		return employeeService.validateAndSaveEmployee(employee);
 	}
-	
+
 	@PutMapping("/{empId}")
 	public Employee updateEmployee(@PathVariable("empId") int empId, @RequestBody Employee employee) {
 		log.info("In Employee controller, requested {/} put :: web method");
 		return employeeService.updateEmployee(empId, employee);
 	}
-	
+
 	@DeleteMapping("/{empId}")
 	public String deleteEmployee(@PathVariable("empId") int empId) {
 		log.info("In Employee controller, requested {/} put :: web method");

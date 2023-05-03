@@ -1,5 +1,6 @@
 package com.shapestone.springboot.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -15,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Employee")
-public class Employee {
+public class Employee implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

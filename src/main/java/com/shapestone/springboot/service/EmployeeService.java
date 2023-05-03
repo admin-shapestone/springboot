@@ -103,5 +103,11 @@ public class EmployeeService {
 		employeeRepository.deleteById(empId);
 		return "Deleted emp successfully ..";
 	}
+	public Employee getEmpByName(String empName) {
+		Employee findByName = employeeRepository.findByName(empName);
+		
+		
+		return employeeRepository.findByName(empName);
+	}
 
 }
